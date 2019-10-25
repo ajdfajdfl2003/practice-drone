@@ -1,0 +1,18 @@
+---
+kind: pipeline
+type: docker
+name: practice-drone
+
+clone:
+  depth: 1
+
+steps:
+  - name: I Want a Tag
+    image: bash
+    commands:
+      - echo ${DRONE_TAG}
+    depends_on:
+      - package
+    when:
+      event:
+        - tag
