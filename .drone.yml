@@ -11,8 +11,6 @@ steps:
     image: bash
     commands:
       - echo ${DRONE_TAG}
-    depends_on:
-      - package
     when:
       event:
         - tag
