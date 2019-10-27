@@ -17,6 +17,7 @@ steps:
     image: bash
     commands:
       - echo "Tag:${DRONE_TAG}"
+      - exit 0
     depends_on:
       - clone
 
@@ -29,6 +30,14 @@ steps:
       username: practice-drone
     depends_on:
       - I Want a Tag
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}
+    when:
+      status: [ success, failure ]
 
 trigger:
   event:
