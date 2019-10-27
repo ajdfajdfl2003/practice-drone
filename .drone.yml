@@ -4,13 +4,24 @@ type: docker
 name: practice-drone
 
 clone:
-  depth: 1
+  disable: true
 
 steps:
-  - name: I Want a Tag
-    image: bash
+  - name: clone
+    image: alpine/git
     commands:
-      - echo ${DRONE_TAG}
+      - git clone https://github.com/ajdfajdfl2003/practice-drone.git .
+      - git checkout $DRONE_COMMIT
     when:
       event:
         - tag
+
+  - name: I Want a Tag
+    image: bash
+    commands:
+      - echo "Tag:${DRONE_TAG}"
+    when:
+      event:
+        - tag
+    depends_on:
+      - clone
