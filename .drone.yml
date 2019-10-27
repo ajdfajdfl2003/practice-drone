@@ -26,6 +26,7 @@ steps:
       webhook:
         from_secret: slack_webhook
       channel: test-drone
+      username: practice-drone
     depends_on:
       - I Want a Tag
 
