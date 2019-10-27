@@ -12,24 +12,22 @@ steps:
     commands:
       - git clone https://github.com/ajdfajdfl2003/practice-drone.git .
       - git checkout $DRONE_COMMIT
-    when:
-      event:
-        - tag
 
   - name: I Want a Tag
     image: bash
     commands:
       - echo "Tag:${DRONE_TAG}"
-    when:
-      event:
-        - tag
     depends_on:
       - clone
 
   - name: slack
     image: plugins/slack
     settings:
-      webhook: https://hooks.slack.com/services/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
+      webhook: https://hooks.slack.com/services/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
       channel: test-drone
     depends_on:
       - I Want a Tag
+
+trigger:
+  event:
+    - tag
