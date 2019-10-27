@@ -36,9 +36,10 @@ steps:
         {{/success}}
     depends_on:
       - I Want a Tag
-    status:
-      - success
-      - failure
+    when:
+      status:
+        - success
+        - failure
 
 trigger:
   event:
