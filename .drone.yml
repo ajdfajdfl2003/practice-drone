@@ -23,7 +23,7 @@ steps:
   - name: slack
     image: plugins/slack
     settings:
-      webhook: https://hooks.slack.com/services/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
+      webhook: https://hooks.slack.com/services/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
       channel: test-drone
     depends_on:
       - I Want a Tag
