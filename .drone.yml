@@ -17,7 +17,7 @@ steps:
     image: bash
     commands:
       - echo "Tag:${DRONE_TAG}"
-      - docker ps -a
+      - exit 0
     depends_on:
       - clone
 
@@ -30,9 +30,9 @@ steps:
       username: practice-drone
       template: >
         {{#success build.status}}
-          build {{build.number}} {{#if author}}({{build.tag}}){{/if}} succeeded. @{{build.author}} good job.
+          build {{build.number}} ({{#if author}}{{build.tag}}{{else}}{{build.branch}}{{/if}}) succeeded. @{{build.author}} good job.
         {{else}}
-          build {{build.number}} {{#if author}}({{build.tag}}){{/if}} failed. @{{build.author}} fix me please.
+          build {{build.number}} ({{#if author}}{{build.tag}}{{else}}{{build.branch}}{{/if}}) failed. @{{build.author}} fix me please.
         {{/success}}
     depends_on:
       - I Want a Tag
