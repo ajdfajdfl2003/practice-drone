@@ -30,9 +30,9 @@ steps:
       username: practice-drone
       template: >
         {{#success build.status}}
-          build {{build.number}} ({{if build.tag}}{{build.tag}}{{end}}) succeeded. Good job.
+          build {{build.number}} ({{build.tag}}) succeeded. {{build.author}} good job.
         {{else}}
-          build {{build.number}} ({{if build.tag}}{{build.tag}}{{end}}) failed. Fix me please.
+          build {{build.number}} ({{build.tag}}) failed. {{build.author}} fix me please.
         {{/success}}
     depends_on:
       - I Want a Tag
