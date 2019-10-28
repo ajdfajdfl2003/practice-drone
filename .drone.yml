@@ -17,6 +17,7 @@ steps:
     image: bash
     commands:
       - echo "Tag:${DRONE_TAG}"
+      - echo "Branch:${DRONE_BRANCH}"
       - exit 0
     depends_on:
       - clone
