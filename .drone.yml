@@ -4,40 +4,13 @@ type: docker
 name: practice-drone
 
 clone:
-  disable: true
+  depath: 1
 
 steps:
-  - name: clone
-    image: alpine/git
-    commands:
-      - git clone https://github.com/ajdfajdfl2003/practice-drone.git .
-      - git checkout $DRONE_COMMIT
-
-  - name: I Want a Tag
+  - name: print drone env
     image: bash
     commands:
+      - echo env
       - echo "Tag:${DRONE_TAG}"
       - echo "Branch:${DRONE_BRANCH}"
       - exit 0
-    depends_on:
-      - clone
-
-  - name: slack
-    image: plugins/slack
-    settings:
-      webhook:
-        from_secret: slack_webhook
-      channel: test-drone
-      username: practice-drone
-      template: >
-        {{#success build.status}}
-          build {{build.number}} ({{#if build.tag}}{{build.tag}}{{else}}{{build.branch}}{{/if}}) succeeded. @{{build.author}} good job.
-        {{else}}
-          build {{build.number}} ({{#if build.tag}}{{build.tag}}{{else}}{{build.branch}}{{/if}}) failed. @{{build.author}} fix me please.
-        {{/success}}
-    depends_on:
-      - I Want a Tag
-    when:
-      status:
-        - success
-        - failure
