@@ -10,7 +10,10 @@ steps:
   - name: print drone env
     image: bash
     commands:
-      - echo env
-      - echo "Tag:${DRONE_TAG}"
-      - echo "Branch:${DRONE_BRANCH}"
+      - echo "${DRONE_BUILD_STATUS}"
+      - echo "$DRONE_BUILD_STATUS"
+      - echo ${DRONE_BUILD_STATUS}
+      - echo $DRONE_BUILD_STATUS
+      - echo "DRONE_BUILD_STATUS:$DRONE_BUILD_STATUS"
+      - echo "DRONE_BUILD_STATUS:${DRONE_BUILD_STATUS}"
       - exit 0
