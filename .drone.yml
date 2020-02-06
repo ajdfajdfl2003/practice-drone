@@ -7,8 +7,18 @@ clone:
   depath: 1
 
 steps:
-  - name: print drone env
+  - name: print drone env with bash image
     image: bash
+    commands:
+      - echo "${DRONE_BUILD_STATUS}"
+      - echo "$DRONE_BUILD_STATUS"
+      - echo ${DRONE_BUILD_STATUS}
+      - echo $DRONE_BUILD_STATUS
+      - echo "DRONE_BUILD_STATUS:$DRONE_BUILD_STATUS"
+      - echo "DRONE_BUILD_STATUS:${DRONE_BUILD_STATUS}"
+      - exit 0
+  - name: print drone env with dwdraju/alpine-curl-jq
+    image: dwdraju/alpine-curl-jq
     commands:
       - echo "${DRONE_BUILD_STATUS}"
       - echo "$DRONE_BUILD_STATUS"
