@@ -7,6 +7,10 @@ clone:
   depath: 1
 
 steps:
+  - name: try maven alpine
+    image: maven:3.5.3-alpine
+    commands:
+      - java -version
   - name: print drone env with bash image
     image: bash
     commands:
@@ -27,15 +31,3 @@ steps:
       - echo "DRONE_BUILD_STATUS:$DRONE_BUILD_STATUS"
       - echo "DRONE_BUILD_STATUS:${DRONE_BUILD_STATUS}"
       - exit 0
-  - name: get info from firebase
-    image: dwdraju/alpine-curl-jq
-    commands:
-      - env
-      - DRONE_BUILD_STATUS=$DRONE_BUILD_STATUS
-      - DRONE_REPO_NAME=$DRONE_REPO_NAME
-      - DRONE_COMMIT=$DRONE_COMMIT
-      - DRONE_COMMIT_AUTHOR=$DRONE_COMMIT_AUTHOR
-      - DRONE_BUILD_LINK=$DRONE_BUILD_LINK
-      - output="${DRONE_REPO_NAME} (${DRONE_COMMIT}) build ${DRONE_BUILD_STATUS}. ( ${DRONE_COMMIT_AUTHOR} ) ${DRONE_BUILD_LINK}"
-      - echo $output > template.txt
-
