@@ -11,4 +11,4 @@ steps:
     image: plugins/ansible
     commands:
       - apk update; apk add bash openrc libxml2-utils docker
-      - docker run hello-world
+      - docker run -v /var/run/docker.sock:/var/run/docker.sock hello-world
