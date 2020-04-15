@@ -10,13 +10,20 @@ steps:
   - name: build_image_when_push
     image: plugins/ansible
     volumes:
-      - name: dockerdaemon
-        path: /var/run/docker.sock
+      - name: dockersock
+        path: /var/run
     commands:
-      - apk update; apk add bash openrc libxml2-utils docker
+      - apk update; apk add bash libxml2-utils docker
       - docker run hello-world
 
+services:
+  - name: docker
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run
+
 volumes:
-  - name: dockerdaemon
-    host:
-      path: /var/run/docker.sock
+  - name: dockersock
+    temp: {}
