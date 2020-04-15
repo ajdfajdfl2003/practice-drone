@@ -10,6 +10,6 @@ steps:
   - name: build_image_when_push
     image: plugins/ansible
     commands:
-      - apk update; apk add bash libxml2-utils docker
-      - /etc/init.d/docker start
+      - apk update; apk add bash openrc libxml2-utils docker
+      - service docker start
       - docker run hello-world
