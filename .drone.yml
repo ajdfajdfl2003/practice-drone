@@ -9,6 +9,14 @@ clone:
 steps:
   - name: build_image_when_push
     image: plugins/ansible
+    volumes:
+      - name: dockerdaemon
+        path: /var/run/docker.sock
     commands:
       - apk update; apk add bash openrc libxml2-utils docker
-      - docker run -v /var/run/docker.sock:/var/run/docker.sock hello-world
+      - docker run hello-world
+
+volumes:
+  - name: dockerdaemon
+    host:
+      path: /var/run/docker.sock
