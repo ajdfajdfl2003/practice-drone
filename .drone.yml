@@ -7,23 +7,12 @@ clone:
   depath: 1
 
 steps:
-  - name: build_image_when_push
-    image: plugins/ansible
-    volumes:
-      - name: dockersock
-        path: /var/run
-    commands:
-      - apk update; apk add bash libxml2-utils docker
-      - docker run hello-world
-
-services:
-  - name: docker
-    image: docker:dind
-    privileged: true
-    volumes:
-      - name: dockersock
-        path: /var/run
-
-volumes:
-  - name: dockersock
-    temp: {}
+  - name: docker-builder
+    image: plugins/docker
+    username:
+      from_secret: docker_user
+    password:
+      from_secret: docker_pwd
+    settings:
+      repo: ajdfajdfl/practice-drone
+      tags: latest
