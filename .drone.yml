@@ -9,10 +9,10 @@ clone:
 steps:
   - name: docker-builder
     image: plugins/docker
-    username:
-      from_secret: docker_user
-    password:
-      from_secret: docker_pwd
     settings:
       repo: ajdfajdfl/practice-drone
       tags: latest
+      username:
+        from_secret: docker_user
+      password:
+        from_secret: docker_pwd
