@@ -17,3 +17,4 @@ steps:
       password:
         from_secret: docker_pwd
       dry_run: true
+      cache_from: "ajdfajdfl/practice-drone:latest"
