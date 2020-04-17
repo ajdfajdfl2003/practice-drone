@@ -7,14 +7,23 @@ clone:
   depath: 1
 
 steps:
-  - name: docker-builder
-    image: plugins/docker
-    settings:
-      repo: ajdfajdfl/practice-drone
-      tags: latest
-      username:
-        from_secret: docker_user
-      password:
-        from_secret: docker_pwd
-      dry_run: true
-      cache_from: "ajdfajdfl/practice-drone:latest"
+  - name: script with docker build
+    image: plugins/ansible
+    commands:
+      - apk update; apk add bash docker
+      -
+    volumes:
+      - name: dockersock
+        path: /var/run
+
+services:
+  - name: docker
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run
+
+volumes:
+  - name: dockersock
+    temp: {}
